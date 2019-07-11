@@ -1,11 +1,14 @@
+// data & labels
 X=[[0,0],[ 1,1], [1,0], [0,1]];  
 y=[0, 0, 1, 1];          
 
+// parameters
 learn_rate=0.1;
 ins=2; 
 nodes=4; 
 out =1;
 
+// helper functions to generate randomised matrices for intializing weights
 function randn(ins, outs){
   W =  []
   for(let i=0; i<ins; i++){
@@ -27,22 +30,24 @@ function zeros(ins, outs){
   return W;
 }
 
+// declaring and initializing some arrays
 ix=[0,0];
 z1=[0,0,0,0];
 X2=[0,0,0,0];
 deY1=[0,0,0,0];
 deX1=[0,0,0,0];
 dW2=[0,0,0,0];
-
 W1=randn(ins,nodes);
 dW1 = zeros(ins, nodes);
 W2=randn(nodes,out);
 mse =[];
 
+// training loop
 for(let i=0; i<100; i++){
     ers =0;
     for(let j=0; j<X.length; j++){
         
+      // feed forward
         ix[0] = X[j][0];
         ix[1] = X[j][1];
 
@@ -54,9 +59,12 @@ for(let i=0; i<100; i++){
         z2 = X2[0]*W2[0][0] +  X2[1]*W2[1][0] + X2[2]*W2[2][0] + X2[3]*W2[3][0];
         yhat=z2;
         
+        // estimate the error
         deX2 = y[j]-yhat; 
         er = deX2;
 
+
+        // backpropagation of the error deX2..
         for(let j=0; j<W2.length; j++){ 
           deY1[j] = deX2*W2[j][0];
         }
@@ -97,6 +105,7 @@ for(let i=0; i<mse.length; i++){
   }
 }
 
+// compare the network predictions "yhat" to the true labels "y"
 for(let j=0; j<X.length; j++){
         
   ix[0] = X[j][0];
