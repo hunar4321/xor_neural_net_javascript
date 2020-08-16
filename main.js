@@ -1,4 +1,4 @@
-// @ hunar ahmad abdulrahman
+// @ hunar ahmad @ Brainxyz
 
 // data & labels
 X=[[0,0],[ 1,1], [1,0], [0,1]];  
